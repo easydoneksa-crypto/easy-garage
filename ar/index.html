@@ -1386,7 +1386,7 @@ function winBody(id){if(id==="ip")return ipHTML();if(id==="mm")return mmHTML();i
 function anchorXY(id){return null;const d=DEV[id];if(!d||!window.G3||!G3.toScreen)return null;let p=d.anchor;if(p==="rail"){if(!S.gauge)return null;p=TP.find(t=>t.id==="rail").p}return G3.toScreen(p)}
 function renderWins(){$("wins").innerHTML=open.map(id=>{const doc=DOCS.includes(id);return `<section class="${doc?"paper":"dev"} d-${id}" data-w="${id}"><button class="dx" data-wx="${id}" aria-label="إغلاق">✕</button>${doc?`<div class="clip"></div><div class="ptitle">${WINS[id][0]} ${WINS[id][1]}</div>`:""}<div class="db" id="wb-${id}">${winBody(id)}</div><div class="rz" data-rz="${id}" title="كبّر أو صغّر">⤡</div></section>`}).join("");
  const W=innerWidth,H=innerHeight;let k=0;document.querySelectorAll("#wins>[data-w]").forEach(el=>{const id=el.dataset.w;if(!pos[id]){const w=el.offsetWidth,h=el.offsetHeight;const a=anchorXY(id);
-  let x,y,s=1;if(W<700){s={ip:.62,mm:.66,scan:.64,fuel:.6}[id]||.9;const ws=w*s,hs=h*s;const slot={mm:[W-ws-68,52],scan:[56,52],fuel:[W-ws-68,Math.max(52,H*.42)],ip:[(W-ws)/2-30,H-hs-12]}[id]||[(W-ws)/2,52+(k%2)*14];[x,y]=slot}
+  let x,y,s=1;if(W<700||H<520){s={ip:.62,mm:.66,scan:.64,fuel:.6}[id]||.9;const ws=w*s,hs=h*s;const slot={mm:[W-ws-68,52],scan:[56,52],fuel:[W-ws-68,Math.max(52,H*.42)],ip:[(W-ws)/2-30,H-hs-12]}[id]||[Math.min((W-ws)/2,W-ws-72),52+(k%2)*14];[x,y]=slot}
   else{const slot={ip:[70,H-h-74],mm:[W-w-78,58],scan:[74,58],fuel:[W-w-78,H-h-80],wo:[(W-w)/2,60],inv:[(W-w)/2+30,90],wiring:[(W-w)/2,70],help:[(W-w)/2,60]}[id]||[70+k*30,60+k*36];[x,y]=slot;y=Math.max(54,y)}
   pos[id]={xy:[x,y],z:++Z,s}}k++});
  layoutDevs();renderDrawer();drawLeads()}
@@ -1399,7 +1399,7 @@ function renderAll(){renderWins();renderCbar();$("costT").textContent=`الفا�
 let wdrag=null;
 document.addEventListener("pointerdown",e=>{const w=e.target.closest("#wins>[data-w]");if(!w)return;const id=w.dataset.w;if(pos[id]){pos[id].z=++Z;w.style.zIndex=Z}
  if(e.target.closest("button,select,input,label,textarea,.ptip,.knob,.rz,[data-nodrag]"))return;
- wdrag={el:w,id,dx:e.clientX-w.offsetLeft,dy:e.clientY-w.offsetTop};w.classList.add("lift");try{w.setPointerCapture(e.pointerId)}catch(_){}e.preventDefault()});
+ if(pos[id])pos[id].user=1;wdrag={el:w,id,dx:e.clientX-w.offsetLeft,dy:e.clientY-w.offsetTop};w.classList.add("lift");try{w.setPointerCapture(e.pointerId)}catch(_){}e.preventDefault()});
 document.addEventListener("pointermove",e=>{if(!wdrag)return;const x=e.clientX-wdrag.dx,y=e.clientY-wdrag.dy;wdrag.el.style.left=x+"px";wdrag.el.style.top=y+"px";
  const a=anchorXY(wdrag.id);pos[wdrag.id]=Object.assign(pos[wdrag.id]||{},{xy:[x,y]});drawLeads()});
 document.addEventListener("pointerup",()=>{if(wdrag)wdrag.el.classList.remove("lift");wdrag=null});
@@ -1408,7 +1408,7 @@ document.addEventListener("pointerup",()=>{if(wdrag)wdrag.el.classList.remove("l
 /* resize: corner handle, two-finger pinch, mouse wheel */
 let rdrag=null;const touches=new Map();
 function setScale(id,s){const p=pos[id];if(!p)return;p.s=Math.max(.45,Math.min(2.2,s));const el=document.querySelector(`#wins>[data-w="${id}"]`);if(el)el.style.transform=`scale(${p.s})`;drawLeads()}
-document.addEventListener("pointerdown",e=>{const r=e.target.closest(".rz");if(!r)return;const id=r.dataset.rz;rdrag={id,y0:e.clientY,x0:e.clientX,s0:(pos[id]&&pos[id].s)||1,h:r.parentElement.offsetHeight};e.preventDefault();e.stopPropagation();try{r.setPointerCapture(e.pointerId)}catch(_){}},true);
+document.addEventListener("pointerdown",e=>{const r=e.target.closest(".rz");if(!r)return;const id=r.dataset.rz;if(pos[id])pos[id].user=1;rdrag={id,y0:e.clientY,x0:e.clientX,s0:(pos[id]&&pos[id].s)||1,h:r.parentElement.offsetHeight};e.preventDefault();e.stopPropagation();try{r.setPointerCapture(e.pointerId)}catch(_){}},true);
 document.addEventListener("pointermove",e=>{if(!rdrag)return;const d=(e.clientY-rdrag.y0)+Math.abs(e.clientX-rdrag.x0)*Math.sign(e.clientY-rdrag.y0||1)*.3;setScale(rdrag.id,rdrag.s0*(1+d/rdrag.h))});
 document.addEventListener("pointerup",()=>{rdrag=null});
 document.addEventListener("pointerdown",e=>{const w=e.target.closest("#wins>[data-w]");if(!w||e.pointerType!=="touch")return;touches.set(e.pointerId,{id:w.dataset.w,x:e.clientX,y:e.clientY});
@@ -1732,7 +1732,7 @@ function boot(){if(!window.G3){$("ov").innerHTML='<div style="position:absolute;
  if(G3.tick)G3.tick(placeMarkers);setTimeout(()=>{G3.view("car");markers()},80);setInterval(placeMarkers,250);
  open=[];renderWins();if(!PROG.tutDone&&!PROG.done)startMission(0);else showMap()}
 MON.init();
-boot();addEventListener("resize",()=>{markers()});
+boot();let lastWH=[innerWidth,innerHeight];addEventListener("resize",()=>{const W=innerWidth,H=innerHeight;if(Math.abs(W-lastWH[0])>80||Math.abs(H-lastWH[1])>80){lastWH=[W,H];Object.keys(pos).forEach(k=>{if(!pos[k].user)delete pos[k]});renderWins()}markers()});
 })();
 </script>
 </body></html>
