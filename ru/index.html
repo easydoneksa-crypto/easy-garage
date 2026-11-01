@@ -164,7 +164,10 @@ button{font:inherit;color:inherit;cursor:pointer}
 .drawer{left:0;right:auto;inset-inline-start:auto;border-inline-end:0;border-right:3px solid var(--y)}
 .zoom{inset-inline-end:auto;left:10px;right:auto;top:auto;bottom:calc(10px + env(safe-area-inset-bottom,0px))}
 .cbar{right:70px;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
-#tut{bottom:calc(16px + env(safe-area-inset-bottom,0px))!important;left:calc(50% - 30px)}
+#tut{bottom:calc(16px + env(safe-area-inset-bottom,0px))!important;left:50%;width:min(calc(100vw - 140px),440px);touch-action:none;cursor:grab}
+#tut.moved{transform:none;bottom:auto!important}
+#tut .grip{display:block;width:40px;height:5px;border-radius:3px;background:#ffffff40;margin:-4px auto 6px}
+@media (max-width:520px){#tut{width:calc(100vw - 132px);padding:10px 11px}#tut p{font-size:14px;line-height:1.5}}
 .popx{position:absolute;top:6px;inset-inline-end:6px;width:30px;height:30px;border-radius:50%;border:0;background:var(--y);color:#111;font-weight:900}.pop h4{padding-inline-end:36px}.pop{position:absolute}
 .cbar .cx{width:40px;height:40px;background:var(--y)!important;color:#111!important;font-weight:900}
 /* icons only, no boxes */
@@ -1721,7 +1724,10 @@ let tutI=-1;
 function tutStart(){tutI=0;tutShow()}
 function tutEnd(){tutI=-1;const b=$("tut");if(b)b.remove();PROG.tutDone=true;saveProg()}
 function tutShow(){let b=$("tut");if(tutI<0||tutI>=TUT.length){tutEnd();return}if(!b){b=document.createElement("div");b.id="tut";document.getElementById("app").appendChild(b)}
- const s=TUT[tutI];b.innerHTML=`<div class="tstep">${tutI+1}/${TUT.length}</div><p>${s.t}</p><div class="row">${s.btn?`<button class="btn y" id="tutNext">${s.btn}</button>`:""}<button class="linkb" id="tutSkip">Пропустить обучение</button></div>`}
+ const s=TUT[tutI];b.innerHTML=`<span class="grip" aria-hidden="true"></span><div class="tstep">${tutI+1}/${TUT.length}</div><p>${s.t}</p><div class="row">${s.btn?`<button class="btn y" id="tutNext">${s.btn}</button>`:""}<button class="linkb" id="tutSkip">Пропустить обучение</button></div>`}
+let tdrag=null;document.addEventListener("pointerdown",e=>{const b=e.target.closest("#tut");if(!b||e.target.closest("button"))return;const r=b.getBoundingClientRect(),pr=b.offsetParent.getBoundingClientRect();tdrag={b,dx:e.clientX-r.left,dy:e.clientY-r.top,pr};b.classList.add("moved");b.style.left=(r.left-pr.left)+"px";b.style.top=(r.top-pr.top)+"px";try{b.setPointerCapture(e.pointerId)}catch(_){}e.preventDefault()});
+document.addEventListener("pointermove",e=>{if(!tdrag)return;const {b,dx,dy,pr}=tdrag;const x=Math.max(0,Math.min(pr.width-b.offsetWidth,e.clientX-pr.left-dx)),y=Math.max(44,Math.min(pr.height-b.offsetHeight,e.clientY-pr.top-dy));b.style.left=x+"px";b.style.top=y+"px"});
+document.addEventListener("pointerup",()=>{tdrag=null});
 setInterval(()=>{if(tutI<0||!S)return;const s=TUT[tutI];if(s.ok&&s.ok()){tutI++;if(tutI>=TUT.length)tutEnd();else{tutShow();clickSound()}}},300);
 document.addEventListener("click",e=>{if(e.target.closest("#tutNext")){tutI++;tutShow()}else if(e.target.closest("#tutSkip"))tutEnd()});
 window.__eg={get S(){return S},setConn,newJob,sys,installComp,removeComp,isFixedNow,reading,ohmFor,FAULTS,MISSIONS};
