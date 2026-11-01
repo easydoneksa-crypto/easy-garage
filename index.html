@@ -6,13 +6,13 @@
 <title>Easy Garage — لعبة تشخيص أعطال السيارات</title>
 <meta name="description" content="Easy Garage: لعبة ورشة سيارات تتعلم فيها تشخيص الأعطال بالملتيميتر وجهاز الفحص وساعة ضغط البنزين. 50 مهمة بالعربي والإنجليزي، تلعبها من المتصفح مجاناً.">
 <meta property="og:title" content="Easy Garage — Car Diagnostic Workshop">
-<meta property="og:description" content="Find the fault, measure, repair. 50 real-world car diagnosis missions in your browser.">
+<meta property="og:description" content="Find the fault, measure, repair. 50 real-world car diagnosis missions in your browser, in 8 languages.">
 <meta property="og:image" content="https://easygaragesimulator.com/img/og.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://easygaragesimulator.com/">
 <meta property="og:url" content="https://easygaragesimulator.com/">
-<link rel="alternate" hreflang="ar" href="https://easygaragesimulator.com/ar/"><link rel="alternate" hreflang="en" href="https://easygaragesimulator.com/en/">
+<link rel="alternate" hreflang="ar" href="https://easygaragesimulator.com/ar/"><link rel="alternate" hreflang="en" href="https://easygaragesimulator.com/en/"><link rel="alternate" hreflang="it" href="https://easygaragesimulator.com/it/"><link rel="alternate" hreflang="es" href="https://easygaragesimulator.com/es/"><link rel="alternate" hreflang="zh" href="https://easygaragesimulator.com/zh/"><link rel="alternate" hreflang="ru" href="https://easygaragesimulator.com/ru/"><link rel="alternate" hreflang="ja" href="https://easygaragesimulator.com/ja/"><link rel="alternate" hreflang="tr" href="https://easygaragesimulator.com/tr/">
 <link rel="icon" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +30,8 @@ header{position:sticky;top:0;z-index:10;background:#14171bee;backdrop-filter:blu
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;text-decoration:none}
 .logo img{width:34px;height:34px;border-radius:8px}
 .nav .sp{flex:1}
-.lang{background:none;border:1px solid var(--line);color:var(--ink);border-radius:20px;padding:6px 14px;font:inherit;font-size:14px;cursor:pointer}
+.lang{background:none;border:1px solid var(--line);color:var(--ink);border-radius:20px;padding:4px 12px;font:inherit;font-size:20px;line-height:1.2;cursor:pointer}
+.gflags{margin-top:18px;color:var(--mute);font-size:14px;display:flex;flex-wrap:wrap;align-items:center;gap:6px}.gflags a{font-size:26px;text-decoration:none;line-height:1;transition:transform .15s}.gflags a:hover{transform:scale(1.15)}
 .btn{display:inline-flex;align-items:center;gap:8px;background:var(--y);color:#111;font-weight:800;text-decoration:none;border-radius:12px;padding:14px 26px;font-size:18px;box-shadow:0 6px 0 var(--y2)33,0 10px 30px #ffc61a33;transition:transform .15s}
 .btn:hover{transform:translateY(-2px)}
 .btn.sm{padding:8px 16px;font-size:15px;border-radius:10px;box-shadow:none}
@@ -72,7 +73,7 @@ html[lang=en] [data-ar]{display:none}
 <header><div class="wrap nav">
  <a class="logo" href="./"><img src="img/icon-512.png" alt="">Easy Garage</a>
  <span class="sp"></span>
- <button class="lang" id="langB" type="button"><span data-ar>English</span><span data-en>العربية</span></button>
+ <button class="lang" id="langB" type="button" aria-label="Language"><span data-ar>🇬🇧</span><span data-en>🇸🇦</span></button>
  <a class="btn sm hide-m play" href="ar/"><span data-ar>العب الحين</span><span data-en>Play now</span></a>
 </div></header>
 
@@ -84,7 +85,8 @@ html[lang=en] [data-ar]{display:none}
   <p class="lead" data-ar>زبون جاب سيارته وفيها عطل. استخدم الملتيميتر وجهاز الفحص وساعة ضغط البنزين، قِس بنفسك، وبدّل القطعة الصح بأقل تكلفة.</p>
   <p class="lead" data-en>A customer’s car won’t behave. Use a multimeter, an OBD scan tool and a fuel pressure gauge, measure for yourself, and replace the right part at the lowest cost.</p>
   <div class="ctas"><a class="btn play" href="ar/"><span data-ar>▶ العب الحين</span><span data-en>▶ Play now</span></a><a class="btn ghost" href="#how"><span data-ar>كيف تلعب؟</span><span data-en>How it works</span></a></div>
-  <div class="stats"><div><b>50</b><span data-ar>مهمة</span><span data-en>missions</span></div><div><b>6</b><span data-ar>مستويات</span><span data-en>levels</span></div><div><b>AR · EN</b><span data-ar>لغتين</span><span data-en>two languages</span></div></div>
+  <div class="gflags" aria-label="Game language"><span data-ar>🌐 العب بلغتك:</span><span data-en>🌐 Play in your language:</span> <a href="ar/" title="العربية">🇸🇦</a><a href="en/" title="English">🇬🇧</a><a href="it/" title="Italiano">🇮🇹</a><a href="es/" title="Español">🇪🇸</a><a href="zh/" title="中文">🇨🇳</a><a href="ru/" title="Русский">🇷🇺</a><a href="ja/" title="日本語">🇯🇵</a><a href="tr/" title="Türkçe">🇹🇷</a></div>
+  <div class="stats"><div><b>50</b><span data-ar>مهمة</span><span data-en>missions</span></div><div><b>6</b><span data-ar>مستويات</span><span data-en>levels</span></div><div><b>8</b><span data-ar>لغات</span><span data-en>languages</span></div></div>
  </div>
  <div class="shot"><img data-ar src="img/play_ar.jpg" alt="لقطة من لعبة Easy Garage" width="1280" height="720"><img data-en src="img/play_en.jpg" alt="Easy Garage gameplay" width="1280" height="720" loading="lazy"></div>
 </div>
@@ -122,9 +124,9 @@ html[lang=en] [data-ar]{display:none}
 
 <footer><div class="wrap"><span>© <span id="yr">2026</span> Easy Garage</span><span class="sp"></span><a href="terms.html"><span data-ar>شروط الاستخدام</span><span data-en>Terms</span></a><a href="privacy.html"><span data-ar>سياسة الخصوصية</span><span data-en>Privacy policy</span></a><a href="terms.html#credits"><span data-ar>المصادر المفتوحة</span><span data-en>Credits</span></a></div><div class="wrap" style="margin-top:10px;font-size:12.5px"><span data-ar>لعبة تعليمية مبسّطة للترفيه، ولا تُعتمد لإصلاح سيارة حقيقية. كل الأسماء خيالية.</span><span data-en>A simplified educational game for entertainment, not a guide for repairing real vehicles. All names are fictional.</span></div></footer>
 <script>
-(function(){var H=document.documentElement;function set(l){H.lang=l;H.dir=l==="ar"?"rtl":"ltr";document.querySelectorAll("a.play").forEach(function(a){a.href=l==="ar"?"ar/":"en/"});try{localStorage.setItem("eg-lang",l)}catch(e){}}
-var l=null;try{l=localStorage.getItem("eg-lang")}catch(e){}if(!l)l=(navigator.language||"ar").slice(0,2)==="ar"?"ar":"en";set(l);
-document.getElementById("langB").onclick=function(){set(H.lang==="ar"?"en":"ar")};document.getElementById("yr").textContent=new Date().getFullYear()})();
+(function(){var H=document.documentElement;function set(l){H.lang=l;H.dir=l==="ar"?"rtl":"ltr";var g=null;try{g=localStorage.getItem("eg-lang")}catch(e){}var S=["ar","en","it","es","zh","ru","ja","tr"];if(!g||S.indexOf(g)<0){g=(navigator.language||"en").slice(0,2).toLowerCase();if(S.indexOf(g)<0)g=l}document.querySelectorAll("a.play").forEach(function(a){a.href=g+"/"})}
+var l=null;try{l=localStorage.getItem("eg-site")}catch(e){}if(!l)l=(navigator.language||"ar").slice(0,2)==="ar"?"ar":"en";set(l);
+document.getElementById("langB").onclick=function(){var n=H.lang==="ar"?"en":"ar";try{localStorage.setItem("eg-site",n)}catch(e){}set(n)};document.getElementById("yr").textContent=new Date().getFullYear()})();
 </script>
 </body>
 </html>
