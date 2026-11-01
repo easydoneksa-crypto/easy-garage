@@ -1732,6 +1732,7 @@ function boot(){if(!window.G3){$("ov").innerHTML='<div style="position:absolute;
  if(G3.tick)G3.tick(placeMarkers);setTimeout(()=>{G3.view("car");markers()},80);setInterval(placeMarkers,250);
  open=[];renderWins();if(!PROG.tutDone&&!PROG.done)startMission(0);else showMap()}
 MON.init();
+const unlockOri=()=>{try{screen.orientation&&screen.orientation.unlock&&screen.orientation.unlock()}catch(_){}};["fullscreenchange","webkitfullscreenchange","resize","pointerdown"].forEach(ev=>addEventListener(ev,unlockOri,{passive:true}));unlockOri();
 boot();let lastWH=[innerWidth,innerHeight];addEventListener("resize",()=>{const W=innerWidth,H=innerHeight;if(Math.abs(W-lastWH[0])>80||Math.abs(H-lastWH[1])>80){lastWH=[W,H];Object.keys(pos).forEach(k=>{if(!pos[k].user)delete pos[k]});renderWins()}markers()});
 })();
 </script>
