@@ -1511,7 +1511,7 @@ function helpHTML(){return `<div class="intro"><p><b>You are a technician in the
  <li>Open ☰ and read the <b>Work order</b>.</li><li>Test the car from the <b>Dashboard</b>: Turn the key ON and hold START.</li>
  <li>Test:: <b>Scan tool</b> for codes and live data, <b>Multimeter</b> (drag the leads onto the numbered points), and the<b>Fuel pressure gauge</b> on point 6.</li>
  <li>Tap any numbered point to unplug its connector or measure the part side. Tap 🔧 to remove and replace parts.</li>
- <li>After replacing, start the car to confirm, choose the cause in the work order, and return the car.</li></ol><p class="sub">⬆︎ lifts the car so you can reach point 9 underneath. One finger moves, two fingers rotate and zoom.</p></div>`}
+ <li>After replacing, start the car to confirm, choose the cause in the work order, and return the car.</li></ol><p class="sub">⬆︎ lifts the car so you can reach point 9 underneath. One finger moves, two fingers rotate and zoom.</p><p class="sub">A simplified educational game, not a guide for repairing real vehicles.</p></div>`}
 
 /* ================= COMPONENT BAR ================= */
 function cstate(k){const c=S.comp[k];if(COMPS[k].svc)return c.fresh?"Done ✓":"Untouched";if(!c.inst)return "Removed";if(!c.conn)return "Installed · connector unplugged";return (c.fresh?"New · ":"")+"Installed and connected"}
