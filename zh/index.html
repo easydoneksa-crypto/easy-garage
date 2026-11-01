@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Easy Garage</title><link rel="icon" href="../favicon.png"><link rel="apple-touch-icon" href="../apple-touch-icon.png"><meta name="theme-color" content="#14171b"><meta name="google-adsense-account" content="ca-pub-6936703685284243"></head><body style="margin:0">
+<!DOCTYPE html><html lang="zh" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Easy Garage</title><link rel="icon" href="../favicon.png"><link rel="apple-touch-icon" href="../apple-touch-icon.png"><meta name="theme-color" content="#14171b"><meta name="google-adsense-account" content="ca-pub-6936703685284243"></head><body style="margin:0"><!-- Easy Garage © 2026. Uses three.js r128 (MIT License, © 2010-2021 three.js authors). Licenses: https://easygaragesimulator.com/terms.html#credits -->
 <style>
 :root{--bg:#0f1214;--panel:#181c20;--panel2:#22272c;--line:#30363d;--ink:#e9edf1;--mute:#9aa4ad;--y:#ffc21a;--red:#e2453c;--ok:#3ecf7a}
 @media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#0f1214}}
@@ -1511,7 +1511,7 @@ function helpHTML(){return `<div class="intro"><p><b>你是车间里的技师。
  <li>打开 ☰ 阅读 <b>工单</b>.</li><li>在这里试车： <b>仪表板</b>: 把钥匙打到 ON，按住 START。</li>
  <li>检查：: <b>诊断仪</b> 读故障码和实时数据， <b>万用表</b> (把表笔拖到编号测试点），以及<b>燃油压力表</b> 接在测试点 6。</li>
  <li>点任意编号测试点可拔下插头或测量零件端。点 🔧 可拆卸和更换零件。</li>
- <li>更换后起动车辆确认，在工单里选择原因，然后交车。</li></ol><p class="sub">⬆︎ 举升车辆以便够到底下的测试点 9。单指移动，双指旋转和缩放。</p><p class="sub">简化的教育游戏，不能作为维修真实车辆的指南。</p></div>`}
+ <li>更换后起动车辆确认，在工单里选择原因，然后交车。</li></ol><p class="sub">⬆︎ 举升车辆以便够到底下的测试点 9。单指移动，双指旋转和缩放。</p><p class="sub">简化的教育游戏，不能作为维修真实车辆的指南。</p><p class="sub" dir="ltr" style="text-align:center"><a href="https://easygaragesimulator.com/privacy.html" target="_blank" rel="noopener">Privacy</a> · <a href="https://easygaragesimulator.com/terms.html" target="_blank" rel="noopener">Terms</a> · <a href="https://easygaragesimulator.com/terms.html#credits" target="_blank" rel="noopener">Credits (three.js MIT)</a></p></div>`}
 
 /* ================= COMPONENT BAR ================= */
 function cstate(k){const c=S.comp[k];if(COMPS[k].svc)return c.fresh?"完成 ✓":"未动";if(!c.inst)return "已拆下";if(!c.conn)return "已安装 · 插头已拔";return (c.fresh?"新件 · ":"")+"已安装并连接"}
