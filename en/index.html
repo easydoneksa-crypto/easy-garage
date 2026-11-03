@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Easy Garage</title><link rel="icon" href="../favicon.png"><link rel="apple-touch-icon" href="../apple-touch-icon.png"><meta name="theme-color" content="#14171b"><meta name="google-adsense-account" content="ca-pub-6936703685284243"><script src="../consent.js"></script></head><body style="margin:0"><!-- Easy Garage © 2026. Uses three.js r128 (MIT License, © 2010-2021 three.js authors). Licenses: https://easygaragesimulator.com/terms.html#credits -->
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Easy Garage</title><link rel="icon" href="../favicon.png"><link rel="apple-touch-icon" href="../apple-touch-icon.png"><meta name="theme-color" content="#14171b"><meta name="google-adsense-account" content="ca-pub-6936703685284243"><script src="../consent.js"></script></head><body style="margin:0"><!-- Easy Garage © 2026. Uses three.js r128 (MIT License, © 2010-2021 three.js authors). Licenses: https://easygaragesimulator.com/terms.html#credits -->
 <style>
 :root{--bg:#0f1214;--panel:#181c20;--panel2:#22272c;--line:#30363d;--ink:#e9edf1;--mute:#9aa4ad;--y:#ffc21a;--red:#e2453c;--ok:#3ecf7a}
 @media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#0f1214}}
@@ -1738,6 +1738,9 @@ function boot(){if(!window.G3){$("ov").innerHTML='<div style="position:absolute;
  if(G3.tick)G3.tick(placeMarkers);setTimeout(()=>{G3.view("car");markers()},80);setInterval(placeMarkers,250);
  open=[];renderWins();if(!PROG.tutDone&&!PROG.done)startMission(0);else showMap()}
 MON.init();
+/* stop trackpad pinch / ctrl+wheel from zooming the whole page (it pushes the toolbars off-screen); pinch zooms the 3D view instead */
+addEventListener("wheel",e=>{if(e.ctrlKey||e.metaKey){e.preventDefault();if(window.G3&&G3.zoom&&e.target.closest&&e.target.closest("#stage"))G3.zoom(e.deltaY<0?1.08:1/1.08)}},{passive:false});
+["gesturestart","gesturechange","gestureend"].forEach(ev=>addEventListener(ev,e=>e.preventDefault(),{passive:false}));
 const unlockOri=()=>{try{screen.orientation&&screen.orientation.unlock&&screen.orientation.unlock()}catch(_){}};["fullscreenchange","webkitfullscreenchange","resize","pointerdown"].forEach(ev=>addEventListener(ev,unlockOri,{passive:true}));unlockOri();
 boot();let lastWH=[innerWidth,innerHeight];addEventListener("resize",()=>{const W=innerWidth,H=innerHeight;if(Math.abs(W-lastWH[0])>80||Math.abs(H-lastWH[1])>80){lastWH=[W,H];Object.keys(pos).forEach(k=>{if(!pos[k].user)delete pos[k]});renderWins()}markers()});
 })();
