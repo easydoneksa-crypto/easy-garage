@@ -1531,13 +1531,13 @@ function update(){renderCbar();open.forEach(refresh);$("costT").textContent=`账
 function markers(){const ov=$("ov");if(!window.G3)return;const lifted=G3.lifted&&G3.lifted();
  ov.innerHTML=TP.filter(t=>!t.under||lifted).map(t=>{const c=t.comp&&S.comp[t.comp];const dis=c&&(!c.conn||!c.inst);const on=(S.red&&S.red.tp===t.id)||(S.blk&&S.blk.tp===t.id)||(t.fuel&&S.gauge)||(t.obd&&S.obd);
   return `<div class="mk${on?" on":""}${dis?" dis":""}${t.info?" info":""}" data-tp="${t.id}">${t.info?"👁"+t.no:t.no}<i>${esc(t.n)}</i></div>`}).join("");placeMarkers()}
-function placeMarkers(){if(!window.G3||!G3.toScreen)return;const st=$("stage").getBoundingClientRect();document.querySelectorAll(".mk").forEach(el=>{const t=TP.find(x=>x.id===el.dataset.tp);const s=G3.toScreen(t.p);if(!s){el.style.display="none";return}el.style.display="flex";el.style.left=(s[0]-st.left)+"px";el.style.top=(s[1]-st.top)+"px"});layoutDevs();drawLeads()}
-function tpScreen(id){const el=document.querySelector(`.mk[data-tp="${id}"]`);if(!el||el.style.display==="none")return null;const r=el.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]}
+function placeMarkers(){if(!window.G3||!G3.toScreen)return;const st=$("stage").getBoundingClientRect();document.querySelectorAll(".mk").forEach(el=>{const t=TP.find(x=>x.id===el.dataset.tp);const s=G3.toScreen(t.p);if(!s){el.style.display="none";return}el.style.display="flex";el._c=[s[0],s[1]];el.style.left=(s[0]-st.left)+"px";el.style.top=(s[1]-st.top)+"px"});layoutDevs();drawLeads()}
+function tpScreen(id){const el=document.querySelector(`.mk[data-tp="${id}"]`);if(!el||el.style.display==="none")return null;if(el._c)return el._c.slice();const r=el.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]}
 /* probe leads, fuel hose, scan cable */
 let pdrag=null;
 function elC(sel){const el=document.querySelector(sel);if(!el)return null;const r=el.getBoundingClientRect();if(!r.width)return null;return [r.left+r.width/2,r.top+r.height/2]}
 function jackPos(which){return elC(`.ptip.${which==="red"?"red":"blk"}`)}
-function drawLeads(){const svg=$("leads");let s="";const top=44;const P=(p)=>`${p[0]} ${p[1]-top}`;
+function drawLeads(){const svg=$("leads");let s="";svg.style.top="0px";svg.style.height="100%";const top=svg.getBoundingClientRect().top;const P=(p)=>`${p[0]} ${p[1]-top}`;
  if(open.includes("mm"))[["red","#e02b2b"],["blk","#141414"]].forEach(([w,col])=>{const j=jackPos(w);if(!j)return;let e=null;if(pdrag&&pdrag.w===w)e=dragEnd();else if(S[w])e=tpScreen(S[w].tp);if(!e)return;
   const mx=(j[0]+e[0])/2,my=Math.max(j[1],e[1])+70;
   s+=`<path d="M${P(j)} Q ${mx} ${my-top} ${P(e)}" stroke="#000" stroke-opacity=".35" stroke-width="7" fill="none" transform="translate(3,5)"/><path d="M${P(j)} Q ${mx} ${my-top} ${P(e)}" stroke="${col}" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M${P(j)} Q ${mx} ${my-top} ${P(e)}" stroke="#fff" stroke-opacity=".25" stroke-width="1.2" fill="none" transform="translate(-1,-1)"/>
@@ -1549,9 +1549,9 @@ function drawLeads(){const svg=$("leads");let s="";const top=44;const P=(p)=>`${
  if(open.includes("scan")){const p=elC(".splug");let e=null;if(pdrag&&pdrag.w==="plug")e=dragEnd();else if(S.obd)e=tpScreen("obd");
   if(p&&e){const d=`M${P(p)} C ${p[0]} ${p[1]-top+110}, ${e[0]} ${e[1]-top+110}, ${P(e)}`;
    s+=`<path d="${d}" stroke="#000" stroke-opacity=".3" stroke-width="9" fill="none" transform="translate(3,5)"/><path d="${d}" stroke="#2a2d31" stroke-width="7" fill="none" stroke-linecap="round"/><rect x="${e[0]-11}" y="${e[1]-top-8}" width="22" height="16" rx="3" fill="#1b1d20" stroke="#000"/>`}}
- svg.style.top="44px";svg.style.height=`calc(100% - 44px)`;svg.innerHTML=s}
+ svg.innerHTML=s}
 const fits=(w,t)=>w==="hose"?!!t.fuel:w==="plug"?!!t.obd:t.pins.length>0;
-function snapTarget(xy,w){let best=null,bd=70;document.querySelectorAll(".mk").forEach(el=>{if(el.style.display==="none")return;const t=TP.find(q=>q.id===el.dataset.tp);if(!fits(w,t))return;const r=el.getBoundingClientRect();const d=Math.hypot(r.left+r.width/2-xy[0],r.top+r.height/2-xy[1]);if(d<bd){bd=d;best=el.dataset.tp}});return best}
+function snapTarget(xy,w){let best=null,bd=70;document.querySelectorAll(".mk").forEach(el=>{if(el.style.display==="none")return;const t=TP.find(q=>q.id===el.dataset.tp);if(!fits(w,t))return;const r=el.getBoundingClientRect();const c=el._c||[r.left+r.width/2,r.top+r.height/2];const d=Math.hypot(c[0]-xy[0],c[1]-xy[1]);if(d<bd){bd=d;best=el.dataset.tp}});return best}
 function dragEnd(){if(!pdrag)return null;const s=pdrag.snap&&tpScreen(pdrag.snap);return s||pdrag.xy}
 function markCands(){document.querySelectorAll(".mk").forEach(el=>{const t=TP.find(q=>q.id===el.dataset.tp);el.classList.toggle("cand",!!pdrag&&fits(pdrag.w,t));el.classList.toggle("snap",!!pdrag&&pdrag.snap===el.dataset.tp)})}
 function clickSound(){beep(1800,.05,.12,"square")}
