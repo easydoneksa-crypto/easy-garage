@@ -1,0 +1,7 @@
+{
+  "appId": "com.easygaragesimulator.app",
+  "appName": "Easy Garage",
+  "webDir": "www",
+  "android": { "backgroundColor": "#14171b" },
+  "plugins": { "AdMob": { "appIdAndroid": "ca-app-pub-3940256099942544~3347511713" } }
+}
