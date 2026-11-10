@@ -33,5 +33,7 @@
     (document.body||document.documentElement).appendChild(d);
   }
   var OWN=/(^|\.)easygaragesimulator\.com$/.test(location.hostname);
+  /* Visit counter (GoatCounter): no cookies, no personal data, IP not stored. Own domain only, never on itch.io or in the app. */
+  if(OWN){var g=document.createElement("script");g.async=true;g.src="https://gc.zgo.at/count.js";g.setAttribute("data-goatcounter","https://easygarage.goatcounter.com/count");(document.head||document.documentElement).appendChild(g)}
   if(OWN&&c!=="yes"&&c!=="no"){if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",show);else show()}
 })();
