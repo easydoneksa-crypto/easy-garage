@@ -37,3 +37,11 @@ jobs:
           prerelease: true
           files: easy-garage-test.apk
           body: Test build with Google's AdMob test ads. For trying on a phone only, not for the Play Store.
+      - name: Publish the unsigned release bundle (signed outside CI)
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: android-bundle
+          name: Easy Garage Android (unsigned bundle)
+          prerelease: true
+          files: android/app/build/outputs/bundle/release/app-release.aab
+          body: Unsigned release bundle. It is signed with the upload key before going to Play Console.
