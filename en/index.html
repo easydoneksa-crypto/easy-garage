@@ -1446,7 +1446,7 @@ document.addEventListener("pointermove",e=>{if(!kdrag)return;let a=Math.atan2(e.
  else{if(S.start){S.crank=false;S.start=false}if(n!==Math.min(2,S.key)||S.key===3)setKey(n)}});
 document.addEventListener("pointerup",()=>{if(!kdrag)return;const sv=document.querySelector(".ign");if(sv)sv.classList.remove("kdrag");kdrag=null;if(S.start){S.crank=false;S.start=false;S.key=2}setBlade(keyAngle());paintLive()});
 /* ---------- drawer ---------- */
-const TBAR=[["ip","⏲","Drive"],["mm","🔌","Meter"],["scan","📟","Scan OBD"],["fuel","⛽","Fuel"],["wrB","🔧","Parts"],["wo","📋","Work order"],["wiring","🗺","Diagram"],["inv","🧾","Invoice"],["hint","💡","Hint"]];
+const TBAR=[["ip","⏲","Dash"],["mm","🔌","Meter"],["scan","📟","Scan OBD"],["fuel","⛽","Fuel"],["wrB","🔧","Parts"],["wo","📋","Work order"],["wiring","🗺","Diagram"],["inv","🧾","Invoice"],["hint","💡","Hint"]];
 function renderTbar(){const tb=$("tbar");if(!tb)return;const cb=$("cbar")&&$("cbar").classList.contains("on");
  tb.innerHTML=TBAR.map(([k,i,l])=>k==="wrB"?`<button class="tb${cb?" on":""}" id="wrB" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`:k==="hint"?`<button class="tb" data-act="hint" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`:`<button class="tb${open.includes(k)?" on":""}" data-open="${k}" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`).join("")}
 function renderDrawer(){renderTbar();const it=[["sec","Game"],["help"],["map","🗺","Missions"],["hint","💡","Hint (ad)"],["fs","⛶","Full screen"]];
@@ -1725,7 +1725,7 @@ document.addEventListener("click",async e=>{const t=e.target;
 /* ================= GUIDED TUTORIAL (mission 1) ================= */
 const TUT=[
  {t:"Welcome to the workshop 👋 The customer says: the car cranks slowly and won’t start. This “work order” has their words. Drag it aside or close it with ✕.",btn:"Got it"},
- {t:"First, let’s test the car ourselves. Tap the icon ⏲ “Drive” in the toolbar.",ok:()=>open.includes("ip")},
+ {t:"First, let’s test the car ourselves. Tap the icon ⏲ “Dash” in the toolbar.",ok:()=>open.includes("ip")},
  {t:"Turn the key with your finger to ON, then continue to START and hold it for a second.",ok:()=>S.crankT>.6},
  {t:"Notice? The engine cranks slowly. Let’s measure the battery: tap the icon 🔌 “Meter”.",ok:()=>open.includes("mm")},
  {t:"Turn the multimeter dial to V⎓ (DC voltage).",ok:()=>S.mode==="V"},

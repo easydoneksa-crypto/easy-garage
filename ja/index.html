@@ -1446,7 +1446,7 @@ document.addEventListener("pointermove",e=>{if(!kdrag)return;let a=Math.atan2(e.
  else{if(S.start){S.crank=false;S.start=false}if(n!==Math.min(2,S.key)||S.key===3)setKey(n)}});
 document.addEventListener("pointerup",()=>{if(!kdrag)return;const sv=document.querySelector(".ign");if(sv)sv.classList.remove("kdrag");kdrag=null;if(S.start){S.crank=false;S.start=false;S.key=2}setBlade(keyAngle());paintLive()});
 /* ---------- drawer ---------- */
-const TBAR=[["ip","⏲","運転"],["mm","🔌","テスター"],["scan","📟","診断 OBD"],["fuel","⛽","燃圧"],["wrB","🔧","部品"],["wo","📋","作業指示書"],["wiring","🗺","配線図"],["inv","🧾","請求書"],["hint","💡","ヒント"]];
+const TBAR=[["ip","⏲","メーター"],["mm","🔌","テスター"],["scan","📟","診断 OBD"],["fuel","⛽","燃圧"],["wrB","🔧","部品"],["wo","📋","作業指示書"],["wiring","🗺","配線図"],["inv","🧾","請求書"],["hint","💡","ヒント"]];
 function renderTbar(){const tb=$("tbar");if(!tb)return;const cb=$("cbar")&&$("cbar").classList.contains("on");
  tb.innerHTML=TBAR.map(([k,i,l])=>k==="wrB"?`<button class="tb${cb?" on":""}" id="wrB" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`:k==="hint"?`<button class="tb" data-act="hint" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`:`<button class="tb${open.includes(k)?" on":""}" data-open="${k}" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`).join("")}
 function renderDrawer(){renderTbar();const it=[["sec","ゲーム"],["help"],["map","🗺","ミッション"],["hint","💡","ヒント（広告）"],["fs","⛶","全画面"]];
@@ -1725,7 +1725,7 @@ document.addEventListener("click",async e=>{const t=e.target;
 /* ================= GUIDED TUTORIAL (mission 1) ================= */
 const TUT=[
  {t:"ワークショップへようこそ 👋 お客様の話：クランキングが遅く、かからない。この“作業指示書”にお客様の言葉がある。横にドラッグするか、これで閉じる： ✕.",btn:"わかった"},
- {t:"まずは自分で車を試そう。アイコンをタップ ⏲ “運転”をツールバーで。",ok:()=>open.includes("ip")},
+ {t:"まずは自分で車を試そう。アイコンをタップ ⏲ “メーター”をツールバーで。",ok:()=>open.includes("ip")},
  {t:"指でキーを ON に回し、続けて START まで回して1秒押さえる。",ok:()=>S.crankT>.6},
  {t:"気づいた？クランキングが遅い。バッテリーを測ろう：アイコンをタップ 🔌 “テスター”。",ok:()=>open.includes("mm")},
  {t:"マルチメーターのダイヤルを回す： V⎓ (直流電圧）。",ok:()=>S.mode==="V"},

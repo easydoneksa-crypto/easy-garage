@@ -1446,7 +1446,7 @@ document.addEventListener("pointermove",e=>{if(!kdrag)return;let a=Math.atan2(e.
  else{if(S.start){S.crank=false;S.start=false}if(n!==Math.min(2,S.key)||S.key===3)setKey(n)}});
 document.addEventListener("pointerup",()=>{if(!kdrag)return;const sv=document.querySelector(".ign");if(sv)sv.classList.remove("kdrag");kdrag=null;if(S.start){S.crank=false;S.start=false;S.key=2}setBlade(keyAngle());paintLive()});
 /* ---------- drawer ---------- */
-const TBAR=[["ip","⏲","Conducir"],["mm","🔌","Tester"],["scan","📟","Escáner OBD"],["fuel","⛽","Gasolina"],["wrB","🔧","Piezas"],["wo","📋","Orden de trabajo"],["wiring","🗺","Esquema"],["inv","🧾","Factura"],["hint","💡","Pista"]];
+const TBAR=[["ip","⏲","Tablero"],["mm","🔌","Tester"],["scan","📟","Escáner OBD"],["fuel","⛽","Gasolina"],["wrB","🔧","Piezas"],["wo","📋","Orden de trabajo"],["wiring","🗺","Esquema"],["inv","🧾","Factura"],["hint","💡","Pista"]];
 function renderTbar(){const tb=$("tbar");if(!tb)return;const cb=$("cbar")&&$("cbar").classList.contains("on");
  tb.innerHTML=TBAR.map(([k,i,l])=>k==="wrB"?`<button class="tb${cb?" on":""}" id="wrB" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`:k==="hint"?`<button class="tb" data-act="hint" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`:`<button class="tb${open.includes(k)?" on":""}" data-open="${k}" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`).join("")}
 function renderDrawer(){renderTbar();const it=[["sec","Juego"],["help"],["map","🗺","Misiones"],["hint","💡","Pista (anuncio)"],["fs","⛶","Pantalla completa"]];
@@ -1725,7 +1725,7 @@ document.addEventListener("click",async e=>{const t=e.target;
 /* ================= GUIDED TUTORIAL (mission 1) ================= */
 const TUT=[
  {t:"Bienvenido al taller 👋 El cliente dice: el coche gira despacio y no arranca. Esta “orden de trabajo” recoge sus palabras. Muévela a un lado o ciérrala con ✕.",btn:"Entendido"},
- {t:"Primero probemos el coche nosotros mismos. Toca el icono ⏲ “Conducir” en la barra de herramientas.",ok:()=>open.includes("ip")},
+ {t:"Primero probemos el coche nosotros mismos. Toca el icono ⏲ “Tablero” en la barra de herramientas.",ok:()=>open.includes("ip")},
  {t:"Gira la llave con el dedo a ON, luego sigue hasta START y mantenla un segundo.",ok:()=>S.crankT>.6},
  {t:"¿Lo notas? El motor gira despacio. Midamos la batería: toca el icono 🔌 “Tester”.",ok:()=>open.includes("mm")},
  {t:"Gira el selector del multímetro a V⎓ (tensión continua).",ok:()=>S.mode==="V"},

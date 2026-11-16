@@ -1446,7 +1446,7 @@ document.addEventListener("pointermove",e=>{if(!kdrag)return;let a=Math.atan2(e.
  else{if(S.start){S.crank=false;S.start=false}if(n!==Math.min(2,S.key)||S.key===3)setKey(n)}});
 document.addEventListener("pointerup",()=>{if(!kdrag)return;const sv=document.querySelector(".ign");if(sv)sv.classList.remove("kdrag");kdrag=null;if(S.start){S.crank=false;S.start=false;S.key=2}setBlade(keyAngle());paintLive()});
 /* ---------- drawer ---------- */
-const TBAR=[["ip","⏲","Пуск"],["mm","🔌","Тестер"],["scan","📟","Сканер OBD"],["fuel","⛽","Топливо"],["wrB","🔧","Детали"],["wo","📋","Заказ-наряд"],["wiring","🗺","Схема"],["inv","🧾","Счёт"],["hint","💡","Подсказка"]];
+const TBAR=[["ip","⏲","Приборы"],["mm","🔌","Тестер"],["scan","📟","Сканер OBD"],["fuel","⛽","Топливо"],["wrB","🔧","Детали"],["wo","📋","Заказ-наряд"],["wiring","🗺","Схема"],["inv","🧾","Счёт"],["hint","💡","Подсказка"]];
 function renderTbar(){const tb=$("tbar");if(!tb)return;const cb=$("cbar")&&$("cbar").classList.contains("on");
  tb.innerHTML=TBAR.map(([k,i,l])=>k==="wrB"?`<button class="tb${cb?" on":""}" id="wrB" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`:k==="hint"?`<button class="tb" data-act="hint" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`:`<button class="tb${open.includes(k)?" on":""}" data-open="${k}" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`).join("")}
 function renderDrawer(){renderTbar();const it=[["sec","Игра"],["help"],["map","🗺","Миссии"],["hint","💡","Подсказка (реклама)"],["fs","⛶","Во весь экран"]];
@@ -1725,7 +1725,7 @@ document.addEventListener("click",async e=>{const t=e.target;
 /* ================= GUIDED TUTORIAL (mission 1) ================= */
 const TUT=[
  {t:"Добро пожаловать в цех 👋 Клиент говорит: машина крутит медленно и не заводится. В этом “заказ-наряде” его слова. Отодвинь его или закрой кнопкой ✕.",btn:"Понятно"},
- {t:"Сначала проверим машину сами. Нажми значок ⏲ “Пуск” на панели инструментов.",ok:()=>open.includes("ip")},
+ {t:"Сначала проверим машину сами. Нажми значок ⏲ “Приборы” на панели инструментов.",ok:()=>open.includes("ip")},
  {t:"Поверни ключ пальцем в ON, затем дальше в START и подержи секунду.",ok:()=>S.crankT>.6},
  {t:"Заметил? Двигатель крутит медленно. Измерим аккумулятор: нажми значок 🔌 “Тестер”.",ok:()=>open.includes("mm")},
  {t:"Поверни переключатель мультиметра на V⎓ (постоянное напряжение).",ok:()=>S.mode==="V"},
