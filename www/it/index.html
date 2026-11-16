@@ -1446,7 +1446,7 @@ document.addEventListener("pointermove",e=>{if(!kdrag)return;let a=Math.atan2(e.
  else{if(S.start){S.crank=false;S.start=false}if(n!==Math.min(2,S.key)||S.key===3)setKey(n)}});
 document.addEventListener("pointerup",()=>{if(!kdrag)return;const sv=document.querySelector(".ign");if(sv)sv.classList.remove("kdrag");kdrag=null;if(S.start){S.crank=false;S.start=false;S.key=2}setBlade(keyAngle());paintLive()});
 /* ---------- drawer ---------- */
-const TBAR=[["ip","⏲","Guida"],["mm","🔌","Tester"],["scan","📟","Diagnosi OBD"],["fuel","⛽","Benzina"],["wrB","🔧","Ricambi"],["wo","📋","Ordine di lavoro"],["wiring","🗺","Schema"],["inv","🧾","Fattura"],["hint","💡","Aiuto"]];
+const TBAR=[["ip","⏲","Cruscotto"],["mm","🔌","Tester"],["scan","📟","Diagnosi OBD"],["fuel","⛽","Benzina"],["wrB","🔧","Ricambi"],["wo","📋","Ordine di lavoro"],["wiring","🗺","Schema"],["inv","🧾","Fattura"],["hint","💡","Aiuto"]];
 function renderTbar(){const tb=$("tbar");if(!tb)return;const cb=$("cbar")&&$("cbar").classList.contains("on");
  tb.innerHTML=TBAR.map(([k,i,l])=>k==="wrB"?`<button class="tb${cb?" on":""}" id="wrB" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`:k==="hint"?`<button class="tb" data-act="hint" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`:`<button class="tb${open.includes(k)?" on":""}" data-open="${k}" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`).join("")}
 function renderDrawer(){renderTbar();const it=[["sec","Gioco"],["help"],["map","🗺","Missioni"],["hint","💡","Aiuto (pubblicità)"],["fs","⛶","Schermo intero"]];
@@ -1725,7 +1725,7 @@ document.addEventListener("click",async e=>{const t=e.target;
 /* ================= GUIDED TUTORIAL (mission 1) ================= */
 const TUT=[
  {t:"Benvenuto in officina 👋 Il cliente dice: l’auto gira lentamente e non parte. Questo “ordine di lavoro” riporta le sue parole. Spostalo di lato o chiudilo con ✕.",btn:"Capito"},
- {t:"Prima proviamo l’auto noi stessi. Tocca l’icona ⏲ “Guida” nella barra degli strumenti.",ok:()=>open.includes("ip")},
+ {t:"Prima proviamo l’auto noi stessi. Tocca l’icona ⏲ “Cruscotto” nella barra degli strumenti.",ok:()=>open.includes("ip")},
  {t:"Gira la chiave col dito su ON, poi continua fino a START e tienila per un secondo.",ok:()=>S.crankT>.6},
  {t:"Hai notato? Il motore gira lentamente. Misuriamo la batteria: tocca l’icona 🔌 “Tester”.",ok:()=>open.includes("mm")},
  {t:"Gira la manopola del multimetro su V⎓ (tensione continua).",ok:()=>S.mode==="V"},

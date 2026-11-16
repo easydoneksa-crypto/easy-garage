@@ -1446,7 +1446,7 @@ document.addEventListener("pointermove",e=>{if(!kdrag)return;let a=Math.atan2(e.
  else{if(S.start){S.crank=false;S.start=false}if(n!==Math.min(2,S.key)||S.key===3)setKey(n)}});
 document.addEventListener("pointerup",()=>{if(!kdrag)return;const sv=document.querySelector(".ign");if(sv)sv.classList.remove("kdrag");kdrag=null;if(S.start){S.crank=false;S.start=false;S.key=2}setBlade(keyAngle());paintLive()});
 /* ---------- drawer ---------- */
-const TBAR=[["ip","⏲","Sür"],["mm","🔌","Multimetre"],["scan","📟","Tarama OBD"],["fuel","⛽","Yakıt"],["wrB","🔧","Parçalar"],["wo","📋","İş emri"],["wiring","🗺","Şema"],["inv","🧾","Fatura"],["hint","💡","İpucu"]];
+const TBAR=[["ip","⏲","Gösterge"],["mm","🔌","Multimetre"],["scan","📟","Tarama OBD"],["fuel","⛽","Yakıt"],["wrB","🔧","Parçalar"],["wo","📋","İş emri"],["wiring","🗺","Şema"],["inv","🧾","Fatura"],["hint","💡","İpucu"]];
 function renderTbar(){const tb=$("tbar");if(!tb)return;const cb=$("cbar")&&$("cbar").classList.contains("on");
  tb.innerHTML=TBAR.map(([k,i,l])=>k==="wrB"?`<button class="tb${cb?" on":""}" id="wrB" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`:k==="hint"?`<button class="tb" data-act="hint" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`:`<button class="tb${open.includes(k)?" on":""}" data-open="${k}" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`).join("")}
 function renderDrawer(){renderTbar();const it=[["sec","Oyun"],["help"],["map","🗺","Görevler"],["hint","💡","İpucu (reklam)"],["fs","⛶","Tam ekran"]];
@@ -1725,7 +1725,7 @@ document.addEventListener("click",async e=>{const t=e.target;
 /* ================= GUIDED TUTORIAL (mission 1) ================= */
 const TUT=[
  {t:"Atölyeye hoş geldin 👋 Müşteri diyor ki: araç yavaş marş basıyor ve çalışmıyor. Bu “iş emri” onun sözlerini içeriyor. Kenara sürükle ya da şununla kapat: ✕.",btn:"Anladım"},
- {t:"Önce aracı kendimiz deneyelim. Şu simgeye dokun: ⏲ “Sür” araç çubuğunda.",ok:()=>open.includes("ip")},
+ {t:"Önce aracı kendimiz deneyelim. Şu simgeye dokun: ⏲ “Gösterge” araç çubuğunda.",ok:()=>open.includes("ip")},
  {t:"Anahtarı parmağınla ON’a çevir, sonra START’a kadar devam et ve bir saniye tut.",ok:()=>S.crankT>.6},
  {t:"Fark ettin mi? Motor yavaş dönüyor. Aküyü ölçelim: şu simgeye dokun: 🔌 “Multimetre”.",ok:()=>open.includes("mm")},
  {t:"Multimetrenin düğmesini şuna çevir: V⎓ (doğru gerilim).",ok:()=>S.mode==="V"},

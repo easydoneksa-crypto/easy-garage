@@ -1446,7 +1446,7 @@ document.addEventListener("pointermove",e=>{if(!kdrag)return;let a=Math.atan2(e.
  else{if(S.start){S.crank=false;S.start=false}if(n!==Math.min(2,S.key)||S.key===3)setKey(n)}});
 document.addEventListener("pointerup",()=>{if(!kdrag)return;const sv=document.querySelector(".ign");if(sv)sv.classList.remove("kdrag");kdrag=null;if(S.start){S.crank=false;S.start=false;S.key=2}setBlade(keyAngle());paintLive()});
 /* ---------- drawer ---------- */
-const TBAR=[["ip","⏲","驾驶"],["mm","🔌","万用表"],["scan","📟","诊断 OBD"],["fuel","⛽","油压"],["wrB","🔧","零件"],["wo","📋","工单"],["wiring","🗺","电路图"],["inv","🧾","账单"],["hint","💡","提示"]];
+const TBAR=[["ip","⏲","仪表盘"],["mm","🔌","万用表"],["scan","📟","诊断 OBD"],["fuel","⛽","油压"],["wrB","🔧","零件"],["wo","📋","工单"],["wiring","🗺","电路图"],["inv","🧾","账单"],["hint","💡","提示"]];
 function renderTbar(){const tb=$("tbar");if(!tb)return;const cb=$("cbar")&&$("cbar").classList.contains("on");
  tb.innerHTML=TBAR.map(([k,i,l])=>k==="wrB"?`<button class="tb${cb?" on":""}" id="wrB" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`:k==="hint"?`<button class="tb" data-act="hint" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`:`<button class="tb${open.includes(k)?" on":""}" data-open="${k}" aria-label="${l}"><span>${i}</span><small>${l}</small></button>`).join("")}
 function renderDrawer(){renderTbar();const it=[["sec","游戏"],["help"],["map","🗺","任务列表"],["hint","💡","提示（广告）"],["fs","⛶","全屏"]];
@@ -1725,7 +1725,7 @@ document.addEventListener("click",async e=>{const t=e.target;
 /* ================= GUIDED TUTORIAL (mission 1) ================= */
 const TUT=[
  {t:"欢迎来到车间 👋 客户说：车子起动转得慢，打不着火。这张“工单”记录了客户的话。把它拖到一边，或用这个关闭： ✕.",btn:"明白了"},
- {t:"先自己试车。点击图标 ⏲ “驾驶”，在工具栏里。",ok:()=>open.includes("ip")},
+ {t:"先自己试车。点击图标 ⏲ “仪表盘”，在工具栏里。",ok:()=>open.includes("ip")},
  {t:"用手指把钥匙拧到 ON，再继续拧到 START 并按住一秒。",ok:()=>S.crankT>.6},
  {t:"注意到了吗？发动机转得很慢。来测电池：点击图标 🔌 “万用表”。",ok:()=>open.includes("mm")},
  {t:"把万用表旋钮转到 V⎓ (直流电压）。",ok:()=>S.mode==="V"},
