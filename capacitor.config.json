@@ -3,5 +3,5 @@
   "appName": "Easy Garage",
   "webDir": "www",
   "android": { "backgroundColor": "#14171b" },
-  "plugins": { "AdMob": { "appIdAndroid": "ca-app-pub-3940256099942544~3347511713" } }
+  "plugins": { "AdMob": { "appIdAndroid": "ca-app-pub-6936703685284243~1991590048" } }
 }
