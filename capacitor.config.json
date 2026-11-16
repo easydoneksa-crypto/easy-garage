@@ -1,5 +1,5 @@
 {
-  "appId": "com.easygaragesimulator.app",
+  "appId": "com.easydonegames.easygarage",
   "appName": "Easy Garage",
   "webDir": "www",
   "android": { "backgroundColor": "#14171b" },
