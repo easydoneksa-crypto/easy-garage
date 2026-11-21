@@ -1249,7 +1249,7 @@ const COMPS={
  fangnd:{n:"Cable de masa del ventilador",part:null,price:30,lab:.5,ico:"⏚",svc:1,act:"Reparar cable de masa del ventilador"}};
 const PART2COMP={battery:"battery",fusebox:"fuse15",crank_sensor:"ckp",injectors:"inj1",coils:"coil1",fuel_tank:"pump",starter:"starter",alternator:"alternator",ect_sensor:"ect",maf:"maf",o2:"o2",fan:"fan"};
 const RATE=150,DIAG_H=.5;
-const ET={"title": "Taller sin fin", "desc": "Cada vez un cliente nuevo con una avería aleatoria. Nunca se acaba.", "lab": "Cliente", "next": "Siguiente cliente ▶", "streak": "Racha", "best": "Mejor", "jobs": "Coches reparados", "play": "Abrir el taller"};
+const ET={"title": "Taller sin fin", "desc": "Cada vez un cliente nuevo con una avería aleatoria. Nunca se acaba.", "lab": "Cliente", "next": "Siguiente cliente ▶", "streak": "Racha", "best": "Mejor", "jobs": "Clientes", "play": "Abrir el taller"};
 const MISSIONS=Object.keys(FAULTS).sort((a,b)=>FAULTS[a].lv-FAULTS[b].lv);
 /* test points: [x,y,z] in car coordinates */
 const TP=[
@@ -1733,7 +1733,7 @@ function showMap(){const tot=Object.values(PROG.stars).reduce((a,b)=>a+b,0);
  ${(WEB&&!MON.native)||/REPLACE/.test(MON_CFG.revenuecat.android)?"":PROG.pro?`<div class="msg ok" style="margin-top:12px">⭐ Versión completa: todas las misiones desbloqueadas, sin anuncios</div>`:`<div class="procard"><b>⭐ Versión completa · ${esc(MON.price||MON_CFG.price)}</b><span>Todas las misiones desbloqueadas ya, y sin anuncios</span><button class="btn y" id="buyPro">Comprar</button><button class="linkb" id="restoreB">Restaurar compras</button></div>`}
  <div class="mapban" style="display:${PROG.pro||WEB?"none":"flex"}">Espacio publicitario (banner de prueba)</div>${ADS.on&&ADS.mapSlot&&!PROG.pro?`<ins class="adsbygoogle" style="display:block;margin-top:12px;min-height:90px" data-ad-client="${ADS.client}" data-ad-slot="${ADS.mapSlot}" data-ad-format="auto" data-full-width-responsive="true"></ins>`:""}`;if(ADS.on&&ADS.mapSlot&&!PROG.pro)try{(window.adsbygoogle=window.adsbygoogle||[]).push({})}catch(_){};
  $("modal").classList.add("on","map");MON.banner(true)}
-function startEndless(){const E=PROG.endless=PROG.endless||{jobs:0,streak:0,best:0};const pool=MISSIONS.filter((f,i)=>unlocked(i));let f=pool[0];if(pool.length>1){do{f=pool[Math.floor(Math.random()*pool.length)]}while(f===E.last)}E.last=f;saveProg();
+function startEndless(){const E=PROG.endless=PROG.endless||{jobs:0,streak:0,best:0};const mx=Math.max(1,...MISSIONS.map((f,i)=>unlocked(i)?FAULTS[f].lv:1));const pool=MISSIONS.filter(f=>FAULTS[f].lv<=mx);let f=pool[0];if(pool.length>1){do{f=pool[Math.floor(Math.random()*pool.length)]}while(f===E.last)}E.last=f;saveProg();
  $("modal").classList.remove("on","map");MON.banner(false);hidePop();setCbar(false);S&&(S.key=0,S.run=false);newJob(E.jobs+1,f);S.endless=true;$("lvT").textContent=ET.title+" · "+ET.lab+" #"+S.job;refresh("wo");open=["wo"];pos={};renderWins();markers()}
 function startMission(i){$("modal").classList.remove("on","map");MON.banner(false);hidePop();setCbar(false);S&&(S.key=0,S.run=false);newJob(i+1,MISSIONS[i]);open=["wo"];pos={};renderWins();markers();if(typeof tutStart==="function"&&i===0&&!PROG.tutDone)tutStart()}
 document.addEventListener("click",async e=>{const t=e.target;
