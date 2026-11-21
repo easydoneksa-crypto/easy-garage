@@ -1668,7 +1668,7 @@ document.addEventListener("pointerup",stopCrank);document.addEventListener("poin
 /* ================= FINISH / SCORE ================= */
 function finish(){const f=FAULTS[S.fault];const fixed=isFixedNow();const verified=S.verified&&S.run||S.verified;const right=S.diagSel===f.fix;
  const also=f.also||[];const ideal=Math.round(DIAG_H*RATE+(f.reseat?.2*RATE:COMPS[f.fix].price+COMPS[f.fix].lab*RATE)+also.reduce((a,k)=>a+COMPS[k].price+COMPS[k].lab*RATE,0));const tot=total();const okN=f.reseat?["Reconectar "+f.rn]:[COMPS[f.fix].n,...also.map(k=>COMPS[k].n)];const extra=S.inv.filter(l=>!okN.includes(l.n));
- let stars=0;if(fixed)stars=1;if(fixed&&right)stars=2;if(fixed&&right&&!extra.length&&S.verified&&!S.hints)stars=3;PROG.stars[S.fault]=Math.max(PROG.stars[S.fault]||0,stars);PROG.done=(PROG.done||0)+1;saveProg();
+ let stars=0;if(fixed)stars=1;if(fixed&&right)stars=2;if(fixed&&right&&!extra.length&&S.verified&&!S.hints)stars=3;PROG.stars[S.fault]=Math.max(PROG.stars[S.fault]||0,stars);PROG.done=(PROG.done||0)+1;saveProg();if(!right)setTimeout(()=>MON.interstitial(),1500);
  const mins=Math.max(1,Math.round((Date.now()-S.timeStart)/60000));
  $("mbox").innerHTML=`<h2 style="margin-top:0">${fixed?"Coche devuelto al cliente ✅":"El cliente trajo el coche de vuelta ❌"}</h2><div class="stars">${"★".repeat(stars)}${"☆".repeat(3-stars)}</div>
  <p>${fixed?"El coche funciona.":"¡El coche sigue sin funcionar! La avería no está reparada."} ${right?"Y tu diagnóstico en la orden de trabajo es correcto.":"Pero la causa que escribiste en la orden de trabajo es incorrecta."}</p>
