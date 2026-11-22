@@ -1,0 +1,9 @@
+name: check-src
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Built pages must match src/
+        run: python3 src/build.py --check
